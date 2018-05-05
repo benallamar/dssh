@@ -1,4 +1,6 @@
 # Ignore files
+.idea
+.idea/*
 {*/}.idea/*
 {*/}.idea
 *.log
