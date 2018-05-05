@@ -5,7 +5,7 @@
     <artifactId>automator-node</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>automator</name>
+    <name>automator-node</name>
     <url>http://maven.apache.org</url>
     <parent>
         <groupId>com.bbles</groupId>
@@ -14,7 +14,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <dependencies>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -32,11 +31,6 @@
             <version>0.3.2</version>
         </dependency>
         <dependency>
-            <groupId>com.typesafe</groupId>
-            <artifactId>config</artifactId>
-            <version>1.3.2</version>
-        </dependency>
-        <dependency>
             <groupId>com.bbles</groupId>
             <artifactId>automator-kernel</artifactId>
             <version>1.0-SNAPSHOT</version>
@@ -48,6 +42,8 @@
         </dependency>
     </dependencies>
     <build>
+        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+        <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
         <extensions>
             <extension>
                 <groupId>kr.motd.maven</groupId>

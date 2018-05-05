@@ -1,0 +1,51 @@
+syntax = "proto2";
+package com.bbles.automator.node.protobuf;
+
+message ClientKernelAuthenticate {
+    required bytes krb_token = 1;
+    required string name = 2;
+}
+
+message ClientKernelDelegationToken {
+    required bytes token = 1;
+    required string name = 2;
+}
+
+message Task {
+    required string token = 1;
+    required string command = 2;
+    required string args = 3;
+    required string type = 4;
+}
+
+message TaskContext {
+    optional string startDate = 1;
+    optional string endDate = 2;
+    optional bool isScheduled = 3;
+    optional bool retryInError = 4;
+    optional int32 maxRetry = 5;
+}
+
+message TaskWrapper {
+    required string tskDescriptor = 3;
+    required TaskContext ctx = 1;
+    required Task tsk = 2;
+}
+
+
+message STDOUT {
+    optional string output = 1;
+}
+
+message ERROUT {
+    optional string output = 1;
+}
+
+message TaskOutput {
+    optional STDOUT stdout = 1;
+    optional ERROUT errout = 2;
+}
+
+service ClientMasterService {
+    rpc execute (TaskWrapper) returns (stream TaskOutput);
+}

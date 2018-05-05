@@ -1,0 +1,23 @@
+syntax = "proto2";
+import public "ClientMasterProtocol.proto";
+
+package com.bbles.automator.node.protobuf;
+
+message ProcessorKernelAuthenticate {
+    required bytes krb_token = 1;
+    required string name = 2;
+}
+
+message ProcessorKernelDelegationToken {
+    required bytes token = 1;
+    required string name = 2;
+}
+
+message TaskRepresenter {
+    required string taskType = 1;
+    required Task task = 2;
+}
+
+service KernelProcessorService {
+    rpc execute (TaskRepresenter) returns (stream TaskOutput);
+}
