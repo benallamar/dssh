@@ -1,0 +1,7 @@
+<configuration>
+    <property>
+        <key>kernel.remote.rpc.port</key>
+        <value></value>
+        <description>The port used by the masternode to contact the reset of the servers</description>
+    </property>
+</configuration>

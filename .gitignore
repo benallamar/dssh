@@ -7,3 +7,6 @@
 *.keytab
 krb5cc*
 {*/}target
+*/target/*
+*/target
+target

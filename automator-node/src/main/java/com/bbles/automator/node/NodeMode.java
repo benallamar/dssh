@@ -10,7 +10,7 @@ public enum NodeMode {
         return mode == MASTER;
     }
 
-    public NodeMode(String mode) {
+    NodeMode(String mode) {
         this.description = mode;
     }
 

@@ -1,86 +1,61 @@
 package com.bbles.automator.node.kernel.rpc.server;
 
-import com.bbles.automator.node.Node;
-import com.bbles.automator.node.protobuf.AckServiceGrpc;
-import com.bbles.automator.node.protobuf.ClientNodeProtocol;
-import com.bbles.automator.node.protobuf.ClientNodeServiceGrpc;
-import com.bbles.automator.node.protobuf.NodeProtocol;
+import com.bbles.automator.node.kernel.action.SystemAction;
+import com.bbles.automator.node.kernel.action.SystemActionHandler;
+import com.bbles.automator.node.kernel.action.SystemCallHandler;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import io.grpc.stub.StreamObserver;
 
+import java.io.IOException;
+import java.util.ArrayList;
 
-public class RPCServer {
-    private RPCServerHandler rpcServerHandler;
-    private Server nodeServer;
-    private Server clientServer;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+public abstract class RPCServer {
+    protected Log logger = LogFactory.getLog(RPCServer.class);
+
+    protected SystemActionHandler systemCallHandler;
+    private ArrayList<Server> servers;
+
 
     /**
-     * Create a RouteGuide server using serverBuilder as a base and features as data.
+     * This return the list of the services that should be handled by the current
+     * RPC services (gives more freedem to the instantiator of server)
+     *
+     * @return an array of the bindable service
+     * every service is binded to a given port.
      */
-    public RPCServer getInstance(int port) {
-        return new RPCServer(ServerBuilder.forPort(port), port)
+    public abstract BindableServiceWithPort[] services();
+
+    public RPCServer(SystemCallHandler systemCallHandler) {
+        this.systemCallHandler = systemCallHandler;
     }
 
-    private RPCServer(ServerBuilder<?> nodeServerBuilder, ServerBuilder clientServerBuilder, int port) {
-        this.port = port;
-        this.nodeServer = nodeServerBuilder.addService(new NodeRPCHandler()).build();
-        this.clientServer = clientServerBuilder.addService(new ClientRPCHandler()).build();
-    }
-
-    private int port;
-
-    public RPCServer(int port, RPCServerHandler commander) {
-        this.port = port;
-        this.rpcServerHandler = commander;
-    }
-
-    /**
-     * Inter node RPC Handler
-     * Handles the request comming from the nodes
-     */
-    private class NodeRPCHandler extends AckServiceGrpc.AckServiceImplBase {
-        private Node commander;
-
-        @Override
-        public void ackNode(NodeProtocol.Ack request, StreamObserver<NodeProtocol.Ack> observer) {
-            if (commander.checkSecret(request.getSecretBytes().toByteArray()))
-                observer.onNext(
-                        NodeProtocol.Ack
-                                .newBuilder()
-                                .setSecret("FuckYou")
-                                .build()
-                );
-
+    protected void init() {
+        for (BindableServiceWithPort service : services()) {
+            logger.info("Add the RPC server handler " + service.getClass().getSimpleName());
+            this.servers.add(ServerBuilder
+                    .forPort(service.getPort())
+                    .addService(service)
+                    .build());
         }
     }
 
-    /**
-     * Client RPC Handler.
-     * This classes handles the request comming from the client
-     */
-    private class ClientRPCHandler extends ClientNodeServiceGrpc.ClientNodeServiceImplBase {
-        private Node commander;
+    public void start() throws IOException {
+        servers.stream().parallel().forEach((server) -> {
+            try {
+                server.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
-        @Override
-        public void hello(ClientNodeProtocol.Hello request, StreamObserver<ClientNodeProtocol.HelloResponse> observer) {
-            if (commander.)
-                observer.onNext(
-                        ClientNodeProtocol.HelloResponse
-                                .newBuilder()
-                                .setHost(commander.uname())
-                                .setName(commander.info())
-                                .build()
-                );
-
-        }
     }
 
-
-    public void start() {
+    public void shutdown() {
         try {
-            clientServer.start();
-            nodeServer.start()
+            servers.stream().parallel().forEach((server) -> server.shutdown());
         } catch (Exception e) {
             e.printStackTrace();
         }
