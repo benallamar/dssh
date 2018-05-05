@@ -1,0 +1,7 @@
+# Ignore files
+{*/}.idea/*
+{*/}.idea
+*.log
+*.keytab
+krb5cc*
+{*/}target
