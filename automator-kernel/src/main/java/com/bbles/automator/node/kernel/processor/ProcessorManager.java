@@ -3,6 +3,7 @@ package com.bbles.automator.node.kernel.processor;
 import com.bbles.automator.node.kernel.OutputStreamObserver;
 import com.bbles.automator.node.kernel.action.InterruptHandler;
 import com.bbles.automator.node.kernel.config.Configuration;
+import com.bbles.automator.node.kernel.rpc.proxy.MasterFollowerProxy;
 import com.bbles.automator.node.kernel.task.TaskWrapper;
 
 import java.util.ArrayList;

@@ -20,6 +20,6 @@ public class TaskOutput {
     }
 
     public static TaskOutput fromProtobuf(ClientMasterProtocol.TaskOutput output) {
-        new TaskOutput(output.getStdout().getOutput(), output.getErrout().getOutput());
+        return new TaskOutput(output.getStdout().getOutput(), output.getErrout().getOutput());
     }
 }

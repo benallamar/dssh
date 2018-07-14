@@ -1,5 +1,9 @@
 package com.bbles.automator.node.kernel.rpc.client.protobuf;
 
-public class FollowerMasterSideHandler  {
-    //Void for the moment
+import com.bbles.automator.node.kernel.action.ResourceHandler;
+import com.bbles.automator.node.protobuf.KernelProcessorServiceGrpc;
+import io.grpc.stub.AbstractStub;
+
+public class FollowerMasterSideHandler {
+    private
 }

@@ -5,6 +5,7 @@ import com.bbles.automator.node.kernel.config.KernelConstants;
 import com.bbles.automator.node.kernel.rpc.client.RPClient;
 import com.bbles.automator.node.kernel.rpc.client.RPClientBuilder;
 import com.bbles.automator.node.kernel.security.UserManager;
+import io.grpc.stub.AbstractStub;
 
 import java.lang.reflect.Proxy;
 
@@ -15,7 +16,7 @@ import java.lang.reflect.Proxy;
  *
  * @param <T>
  */
-public class ClientMasterProxy<T> extends Proxy {
+public class ClientMasterProxy<T extends AbstractStub> /* TODO: Add `extends Proxy`*/ {
     private UserManager mg;
     private RPClient<T> proxy;
 
@@ -24,9 +25,8 @@ public class ClientMasterProxy<T> extends Proxy {
         proxy = RPClientBuilder
                 .newBuild()
                 .withBlockingRPC(false)
-                .withHost(config.get(KernelConstants.KERNEL_CLIENT_RPC_PORT))
-                .withPort(config.get(KernelConstants.KERNEL_CLIENT_RPC_PORT))
-                .withRPCHandler(T.class)
+                .withHost(config.get(KernelConstants.KERNEL_CLIENT_RPC_PORT, "localhost"))
+                .withPort(config.get(KernelConstants.KERNEL_CLIENT_RPC_PORT, KernelConstants.DEFAULT_KERNEL_NODE_RPC_PORT))
                 .build();
     }
 

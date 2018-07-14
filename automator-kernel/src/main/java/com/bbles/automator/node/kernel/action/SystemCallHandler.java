@@ -13,5 +13,6 @@ import java.io.IOException;
  */
 public interface SystemCallHandler extends SystemActionHandler {
 
-    void execute(TaskWrapper ctx, OutputStreamObserver<?> observer) throws IOException;
+    void execute(TaskWrapper ctx, OutputStreamObserver observer) throws Exception;
+
 }

@@ -2,7 +2,7 @@ package com.bbles.automator.node.kernel.security;
 
 public class Token {
     public static Token getInstance(byte[] token) {
-        new Token();
+        return new Token();
     }
 
     public byte[] toByte() {

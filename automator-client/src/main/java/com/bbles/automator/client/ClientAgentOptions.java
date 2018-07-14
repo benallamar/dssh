@@ -9,6 +9,6 @@ public class ClientAgentOptions {
 
 
     public String[] getCommandArgument() {
-        return new String[]{""}
+        return new String[]{""};
     }
 }

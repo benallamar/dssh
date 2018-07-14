@@ -15,8 +15,8 @@ import org.apache.commons.logging.LogFactory;
 public abstract class RPCServer {
     protected Log logger = LogFactory.getLog(RPCServer.class);
 
-    protected SystemActionHandler systemCallHandler;
-    private ArrayList<Server> servers;
+    protected SystemActionHandler systemActionHandler;
+    private ArrayList<Server> servers = new ArrayList<>();
 
 
     /**
@@ -28,8 +28,8 @@ public abstract class RPCServer {
      */
     public abstract BindableServiceWithPort[] services();
 
-    public RPCServer(SystemCallHandler systemCallHandler) {
-        this.systemCallHandler = systemCallHandler;
+    public RPCServer(SystemActionHandler systemCallHandler) {
+        this.systemActionHandler = systemCallHandler;
     }
 
     protected void init() {
@@ -42,15 +42,15 @@ public abstract class RPCServer {
         }
     }
 
-    public void start() throws IOException {
-        servers.stream().parallel().forEach((server) -> {
+    public void start() {
+        servers.forEach((server) -> {
             try {
                 server.start();
-            } catch (IOException e) {
+                logger.info("Starting the server for the service: " + server.getPort());
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
-
     }
 
     public void shutdown() {

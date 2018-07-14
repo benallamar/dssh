@@ -33,12 +33,20 @@ public class TaskManager extends Thread {
         return queue.poll();
     }
 
+    public int waitingTask() {
+        return queue.size();
+    }
 
     public void run() {
         while (true) {
             try {
-                TaskWrapper tskWrapper = getTaskWrapper();
-                kernel.execute(tskWrapper);
+                if (waitingTask() > 0) {
+                    TaskWrapper tskWrapper = getTaskWrapper();
+                    kernel.execute(tskWrapper, null);
+                } else {
+                    // We sleep waiting for other tasks to come
+                    Thread.sleep(2000);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

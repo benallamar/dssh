@@ -2,11 +2,16 @@ package com.bbles.automator.node;
 
 
 import com.bbles.automator.node.kernel.Kernel;
+import com.bbles.automator.node.kernel.config.Configuration;
 
 public class MasterNode implements Node {
     private Kernel kernel;
     private NodeMode mode = NodeMode.FOLLOWER;
     private String version = "0.1.0";
+
+    public MasterNode() {
+        kernel = new Kernel(new Configuration());
+    }
 
     @Override
     public String info() {

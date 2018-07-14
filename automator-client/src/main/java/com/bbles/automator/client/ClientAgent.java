@@ -8,7 +8,7 @@ import com.bbles.automator.node.kernel.rpc.proxy.ClientMasterProxy;
 
 public class ClientAgent {
     private Configuration config;
-    private ClientMasterProxy<MasterClientSideHandler> master;
+    private ClientMasterProxy master;
     private ClientAgentOptions options;
 
     public ClientAgent(Configuration config, ClientAgentOptions options) {
@@ -18,16 +18,16 @@ public class ClientAgent {
     }
 
     public static ClientAgent load(ClientAgentOptions options) {
-        return setupShellConnection(new Configuration, options);
+        return setupShellConnection(new Configuration(), options);
     }
 
     /**
      * Execute the command
      */
     public void execute() {
-        master.getProxy()
-                .getChannel()
-                .execute(options.getCommand(), options.getCommandArgument());
+        //  master.getProxy()
+        //         .getChannel()
+        //        .execute(options.getCommand(), options.getCommandArgument());
     }
 
     /**

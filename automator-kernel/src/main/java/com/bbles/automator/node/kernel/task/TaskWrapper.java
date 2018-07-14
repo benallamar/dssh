@@ -36,12 +36,6 @@ public class TaskWrapper extends Thread {
         return ctx;
     }
 
-
-    public TaskOutput getTaskOutPut() {
-        return TaskOutput;
-    }
-
-
     /**
      * Get a protobuf-base serialized task wrapper from the native taskwrapper
      *
@@ -51,7 +45,7 @@ public class TaskWrapper extends Thread {
     public static ClientMasterProtocol.TaskWrapper toProtobuf(TaskWrapper taskWrapper) {
         return ClientMasterProtocol.TaskWrapper.newBuilder()
                 .setTsk(Task.toProtobuf(taskWrapper.getTask()))
-                .setCtx(TaskContext.fromProtobuf(taskWrapper.getContext()))
+                .setCtx(TaskContext.toProtobuf(taskWrapper.getContext()))
                 .build();
     }
 }

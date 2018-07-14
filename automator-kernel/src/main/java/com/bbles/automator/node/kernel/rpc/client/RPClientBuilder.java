@@ -2,6 +2,8 @@ package com.bbles.automator.node.kernel.rpc.client;
 
 import io.grpc.stub.AbstractStub;
 
+import javax.annotation.CheckForSigned;
+
 public class RPClientBuilder<T extends AbstractStub> {
     private int port = 9999;
     private String host;
@@ -21,7 +23,7 @@ public class RPClientBuilder<T extends AbstractStub> {
         this.port = port;
         return this;
     }
-
+    @CheckForSigned
     public RPClientBuilder withRPCHandler(Class<T> rpcHandler) {
         this.rpcHandler = rpcHandler;
         return this;

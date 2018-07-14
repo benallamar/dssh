@@ -9,8 +9,11 @@ import com.bbles.automator.node.kernel.security.TokenManager;
 import com.bbles.automator.node.kernel.security.UserGroupManager;
 import com.bbles.automator.node.kernel.task.TaskManager;
 import com.bbles.automator.node.kernel.task.TaskWrapper;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class Kernel implements SystemCallHandler, SecurityHandler, InterruptHandler {
+    private Log logger = LogFactory.getLog(this.getClass());
     private ProcessorManager processorManager;
     private TokenManager tokenManager;
     private KernelRPCServer kernelRPCServer;
@@ -28,7 +31,9 @@ public class Kernel implements SystemCallHandler, SecurityHandler, InterruptHand
      */
     public void start() {
         try {
+            logger.info("Start the Kernek server");
             kernelRPCServer.start();
+            taskManager.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,6 +48,7 @@ public class Kernel implements SystemCallHandler, SecurityHandler, InterruptHand
         }
     }
 
+    @Override
     public void execute(TaskWrapper taskWrapper, OutputStreamObserver observer) throws Exception {
         //TODO: Could we get stream inforamtion from this output (to be handled in safe mode)
         processorManager.execute(taskWrapper, observer);
@@ -67,5 +73,10 @@ public class Kernel implements SystemCallHandler, SecurityHandler, InterruptHand
 
     public TokenManager getTokenManager() {
         return tokenManager;
+    }
+
+    public static void main(String[] args) {
+        Kernel kernel = new Kernel(new Configuration());
+        kernel.start();
     }
 }

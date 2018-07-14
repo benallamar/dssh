@@ -35,7 +35,7 @@ public class Processor implements SystemActionHandler {
      * @param port
      */
     private Processor(InetAddress host, int port) {
-        this.host = host;
+        this.host = host.getCanonicalHostName();
         this.port = port;
         this.processorRPCServer = null;
     }
@@ -44,7 +44,23 @@ public class Processor implements SystemActionHandler {
      *  Start the processor
      */
     public void start() {
-        processorRPCServer.start();
+        try {
+            processorRPCServer.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Close the processor
+     */
+
+    public void shutdown() {
+        try {
+            processorRPCServer.shutdown();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -53,18 +69,7 @@ public class Processor implements SystemActionHandler {
      * @return
      */
     public static Configuration getDefaultProcessorConfiguration() {
-        return Configuration.getDefaultConfigurationByName(this.getClass().getSimpleName());
-    }
-
-    /**
-     * Get a processor from the standby executiong
-     *
-     * @param host
-     * @param port
-     * @return
-     */
-    public static Processor getInstanceFromIPCoordinate(InetAddress host, int port) {
-        return new Processor(host, port);
+        return Configuration.getDefaultConfigurationByName(Processor.class.getSimpleName());
     }
 
     public int getPort() {

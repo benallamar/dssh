@@ -10,8 +10,6 @@ import com.bbles.automator.node.protobuf.MasterFollowerProtocol;
 import java.util.Iterator;
 
 public class MasterFollowerProxy {
-    private RPClient<FollowerMasterSideHandler> follower;
-
     private Iterator<TaskOutput> execute(TaskWrapper taskWrapper) {
         /**
          * How to do many connections at the sametime for the same groups ?

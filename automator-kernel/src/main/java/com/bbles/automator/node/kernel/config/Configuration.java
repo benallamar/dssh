@@ -3,7 +3,17 @@ package com.bbles.automator.node.kernel.config;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
-public class Configuration implements Config {
+public class Configuration {
+
+    private Config config;
+
+    public Configuration() {
+        config = ConfigFactory.load();
+    }
+
+    public Configuration(String configurationLoader) {
+        config = ConfigFactory.load(configurationLoader);
+    }
 
     /**
      * Return the default configuration for a given node.
@@ -21,7 +31,7 @@ public class Configuration implements Config {
 
     public int get(String key, int defaultValue) {
         try {
-            getInt(key);
+            config.getInt(key);
         } finally {
             return defaultValue;
         }
@@ -29,14 +39,10 @@ public class Configuration implements Config {
 
     public String get(String key, String defaultValue) {
         try {
-            getString(key);
+            config.getString(key);
         } finally {
             return defaultValue;
         }
     }
 
-    @Override
-    public Config atPath(String s) {
-        return null;
-    }
 }

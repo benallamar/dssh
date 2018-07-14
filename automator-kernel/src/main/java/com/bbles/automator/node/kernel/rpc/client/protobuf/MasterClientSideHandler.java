@@ -32,7 +32,7 @@ public class MasterClientSideHandler {
                             .build();
             Iterator<ClientMasterProtocol.TaskOutput> outputs = channel.execute(tskWrapper);
             while (outputs.hasNext()) {
-                output.collect(TaskOutput.fromProtobuf(outputs.next()));
+                TaskOutput.fromProtobuf(outputs.next());
             }
         } catch (Exception e) {
             e.printStackTrace();
