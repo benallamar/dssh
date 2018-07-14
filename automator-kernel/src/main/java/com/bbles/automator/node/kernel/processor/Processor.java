@@ -23,10 +23,6 @@ public class Processor implements SystemActionHandler {
         processorRPCServer = new ProcessorRPCServer(this, config);
     }
 
-    public Processor() {
-        this(Processor.getDefaultProcessorConfiguration());
-    }
-
     /**
      * Processor abstract the nodes executing the command comming
      * from the client through the kernel.
@@ -61,15 +57,6 @@ public class Processor implements SystemActionHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Get the default configuration
-     *
-     * @return
-     */
-    public static Configuration getDefaultProcessorConfiguration() {
-        return Configuration.getDefaultConfigurationByName(Processor.class.getSimpleName());
     }
 
     public int getPort() {

@@ -45,8 +45,8 @@ public abstract class RPCServer {
     public void start() {
         servers.forEach((server) -> {
             try {
+                logger.info("Starting the server for the service: " + server.getClass().getCanonicalName() + " on the port : " + server.getPort());
                 server.start();
-                logger.info("Starting the server for the service: " + server.getPort());
             } catch (Exception e) {
                 e.printStackTrace();
             }

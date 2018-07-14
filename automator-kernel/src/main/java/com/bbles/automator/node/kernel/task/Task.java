@@ -1,13 +1,11 @@
 package com.bbles.automator.node.kernel.task;
 
-import com.bbles.automator.node.kernel.OutputStreamObserver;
-import com.bbles.automator.node.kernel.exception.task.IllegalTask;
 import com.bbles.automator.node.kernel.task.shell.ShellTask;
 import com.bbles.automator.node.protobuf.ClientMasterProtocol;
 
 import java.io.IOException;
 
-public abstract class Task {
+public abstract class Task{
 
     /**
      * Construct a class from protobuf protocol
@@ -87,5 +85,4 @@ public abstract class Task {
                 .build();
     }
 
-    public abstract void execute(OutputStreamObserver outPutStream) throws IOException;
 }

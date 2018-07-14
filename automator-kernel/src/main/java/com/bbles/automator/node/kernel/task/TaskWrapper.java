@@ -1,7 +1,6 @@
 package com.bbles.automator.node.kernel.task;
 
 
-import com.bbles.automator.node.kernel.OutputStreamObserver;
 import com.bbles.automator.node.protobuf.ClientMasterProtocol;
 
 import java.io.IOException;
@@ -15,11 +14,6 @@ public class TaskWrapper extends Thread {
     public TaskWrapper(TaskContext ctx, Task tsk) {
         this.ctx = ctx;
         this.tsk = tsk;
-    }
-
-    public void execute(OutputStreamObserver kernelOutPutStream) throws IOException {
-        //TODO: Check the TaskContext for more correct information
-        tsk.execute(kernelOutPutStream);
     }
 
     public static TaskWrapper fromProtobuf(ClientMasterProtocol.TaskWrapper wrapper) {
@@ -47,5 +41,9 @@ public class TaskWrapper extends Thread {
                 .setTsk(Task.toProtobuf(taskWrapper.getTask()))
                 .setCtx(TaskContext.toProtobuf(taskWrapper.getContext()))
                 .build();
+    }
+
+    public ClientMasterProtocol.TaskWrapper toProtobuf() {
+        return TaskWrapper.toProtobuf(this);
     }
 }

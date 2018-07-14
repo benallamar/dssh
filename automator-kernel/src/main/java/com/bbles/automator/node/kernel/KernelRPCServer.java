@@ -25,6 +25,8 @@ public class KernelRPCServer extends RPCServer {
      */
     @Override
     public BindableServiceWithPort[] services() {
+        // TODO: Move this to a more reflective way to get class
+        // In order to have more configured way
         return new BindableServiceWithPort[]{new ClientMasterServerSideHandler(kernel, clientRpcPort), new KernelProcessorServiceHandler(kernel, processorRpcPort)};
     }
 

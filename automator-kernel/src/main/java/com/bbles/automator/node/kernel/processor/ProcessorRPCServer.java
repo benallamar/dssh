@@ -1,18 +1,9 @@
 package com.bbles.automator.node.kernel.processor;
 
-import com.bbles.automator.node.kernel.ClientOutputStreamObserver;
-import com.bbles.automator.node.kernel.action.InterruptHandler;
 import com.bbles.automator.node.kernel.config.Configuration;
 import com.bbles.automator.node.kernel.config.ProcessorConstants;
 import com.bbles.automator.node.kernel.rpc.server.BindableServiceWithPort;
 import com.bbles.automator.node.kernel.rpc.server.RPCServer;
-import com.bbles.automator.node.kernel.task.Task;
-import com.bbles.automator.node.protobuf.ClientMasterProtocol;
-import com.bbles.automator.node.protobuf.KernelProcessorServiceGrpc;
-import com.bbles.automator.node.protobuf.MasterFollowerProtocol;
-import io.grpc.stub.StreamObserver;
-
-import java.io.IOException;
 
 /**
  * RPCServer for the processors (follower node)

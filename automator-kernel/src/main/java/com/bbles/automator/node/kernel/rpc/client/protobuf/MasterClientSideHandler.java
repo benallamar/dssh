@@ -20,7 +20,7 @@ public class MasterClientSideHandler {
      * @param output
      * @param taskWrapper TaskWrapper that holds all the information about the task to be executed
      */
-    public void execute(StreamTaskOutput output, TaskWrapper taskWrapper) {
+    public void submit(TaskWrapper taskWrapper) {
         try {
             ClientMasterProtocol.Task tskProto = Task.toProtobuf(taskWrapper.getTask());
             ClientMasterProtocol.TaskContext ctxProto = TaskContext.toProtobuf(taskWrapper.getContext());

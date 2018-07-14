@@ -6296,6 +6296,781 @@ public final class ClientMasterProtocol {
 
   }
 
+  public interface TaskDescriptorOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.bbles.automator.node.protobuf.TaskDescriptor)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string taskId = 1;</code>
+     */
+    boolean hasTaskId();
+    /**
+     * <code>required string taskId = 1;</code>
+     */
+    java.lang.String getTaskId();
+    /**
+     * <code>required string taskId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getTaskIdBytes();
+
+    /**
+     * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+     */
+    boolean hasTaskWrapper();
+    /**
+     * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+     */
+    com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper getTaskWrapper();
+    /**
+     * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+     */
+    com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapperOrBuilder getTaskWrapperOrBuilder();
+  }
+  /**
+   * Protobuf type {@code com.bbles.automator.node.protobuf.TaskDescriptor}
+   */
+  public  static final class TaskDescriptor extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:com.bbles.automator.node.protobuf.TaskDescriptor)
+      TaskDescriptorOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use TaskDescriptor.newBuilder() to construct.
+    private TaskDescriptor(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private TaskDescriptor() {
+      taskId_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TaskDescriptor(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              taskId_ = bs;
+              break;
+            }
+            case 18: {
+              com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = taskWrapper_.toBuilder();
+              }
+              taskWrapper_ = input.readMessage(com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(taskWrapper_);
+                taskWrapper_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.bbles.automator.node.protobuf.ClientMasterProtocol.internal_static_com_bbles_automator_node_protobuf_TaskDescriptor_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.bbles.automator.node.protobuf.ClientMasterProtocol.internal_static_com_bbles_automator_node_protobuf_TaskDescriptor_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor.class, com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int TASKID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object taskId_;
+    /**
+     * <code>required string taskId = 1;</code>
+     */
+    public boolean hasTaskId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string taskId = 1;</code>
+     */
+    public java.lang.String getTaskId() {
+      java.lang.Object ref = taskId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          taskId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string taskId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTaskIdBytes() {
+      java.lang.Object ref = taskId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        taskId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TASKWRAPPER_FIELD_NUMBER = 2;
+    private com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper taskWrapper_;
+    /**
+     * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+     */
+    public boolean hasTaskWrapper() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+     */
+    public com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper getTaskWrapper() {
+      return taskWrapper_ == null ? com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper.getDefaultInstance() : taskWrapper_;
+    }
+    /**
+     * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+     */
+    public com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapperOrBuilder getTaskWrapperOrBuilder() {
+      return taskWrapper_ == null ? com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper.getDefaultInstance() : taskWrapper_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasTaskId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (hasTaskWrapper()) {
+        if (!getTaskWrapper().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, taskId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, getTaskWrapper());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, taskId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getTaskWrapper());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor)) {
+        return super.equals(obj);
+      }
+      com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor other = (com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor) obj;
+
+      boolean result = true;
+      result = result && (hasTaskId() == other.hasTaskId());
+      if (hasTaskId()) {
+        result = result && getTaskId()
+            .equals(other.getTaskId());
+      }
+      result = result && (hasTaskWrapper() == other.hasTaskWrapper());
+      if (hasTaskWrapper()) {
+        result = result && getTaskWrapper()
+            .equals(other.getTaskWrapper());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasTaskId()) {
+        hash = (37 * hash) + TASKID_FIELD_NUMBER;
+        hash = (53 * hash) + getTaskId().hashCode();
+      }
+      if (hasTaskWrapper()) {
+        hash = (37 * hash) + TASKWRAPPER_FIELD_NUMBER;
+        hash = (53 * hash) + getTaskWrapper().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.bbles.automator.node.protobuf.TaskDescriptor}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.bbles.automator.node.protobuf.TaskDescriptor)
+        com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptorOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.bbles.automator.node.protobuf.ClientMasterProtocol.internal_static_com_bbles_automator_node_protobuf_TaskDescriptor_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.bbles.automator.node.protobuf.ClientMasterProtocol.internal_static_com_bbles_automator_node_protobuf_TaskDescriptor_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor.class, com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor.Builder.class);
+      }
+
+      // Construct using com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getTaskWrapperFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        taskId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (taskWrapperBuilder_ == null) {
+          taskWrapper_ = null;
+        } else {
+          taskWrapperBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.bbles.automator.node.protobuf.ClientMasterProtocol.internal_static_com_bbles_automator_node_protobuf_TaskDescriptor_descriptor;
+      }
+
+      public com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor getDefaultInstanceForType() {
+        return com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor.getDefaultInstance();
+      }
+
+      public com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor build() {
+        com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor buildPartial() {
+        com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor result = new com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.taskId_ = taskId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (taskWrapperBuilder_ == null) {
+          result.taskWrapper_ = taskWrapper_;
+        } else {
+          result.taskWrapper_ = taskWrapperBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor) {
+          return mergeFrom((com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor other) {
+        if (other == com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor.getDefaultInstance()) return this;
+        if (other.hasTaskId()) {
+          bitField0_ |= 0x00000001;
+          taskId_ = other.taskId_;
+          onChanged();
+        }
+        if (other.hasTaskWrapper()) {
+          mergeTaskWrapper(other.getTaskWrapper());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasTaskId()) {
+          return false;
+        }
+        if (hasTaskWrapper()) {
+          if (!getTaskWrapper().isInitialized()) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object taskId_ = "";
+      /**
+       * <code>required string taskId = 1;</code>
+       */
+      public boolean hasTaskId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string taskId = 1;</code>
+       */
+      public java.lang.String getTaskId() {
+        java.lang.Object ref = taskId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            taskId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string taskId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTaskIdBytes() {
+        java.lang.Object ref = taskId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          taskId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string taskId = 1;</code>
+       */
+      public Builder setTaskId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        taskId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string taskId = 1;</code>
+       */
+      public Builder clearTaskId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        taskId_ = getDefaultInstance().getTaskId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string taskId = 1;</code>
+       */
+      public Builder setTaskIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        taskId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper taskWrapper_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper, com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper.Builder, com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapperOrBuilder> taskWrapperBuilder_;
+      /**
+       * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+       */
+      public boolean hasTaskWrapper() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+       */
+      public com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper getTaskWrapper() {
+        if (taskWrapperBuilder_ == null) {
+          return taskWrapper_ == null ? com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper.getDefaultInstance() : taskWrapper_;
+        } else {
+          return taskWrapperBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+       */
+      public Builder setTaskWrapper(com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper value) {
+        if (taskWrapperBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          taskWrapper_ = value;
+          onChanged();
+        } else {
+          taskWrapperBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+       */
+      public Builder setTaskWrapper(
+          com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper.Builder builderForValue) {
+        if (taskWrapperBuilder_ == null) {
+          taskWrapper_ = builderForValue.build();
+          onChanged();
+        } else {
+          taskWrapperBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+       */
+      public Builder mergeTaskWrapper(com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper value) {
+        if (taskWrapperBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              taskWrapper_ != null &&
+              taskWrapper_ != com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper.getDefaultInstance()) {
+            taskWrapper_ =
+              com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper.newBuilder(taskWrapper_).mergeFrom(value).buildPartial();
+          } else {
+            taskWrapper_ = value;
+          }
+          onChanged();
+        } else {
+          taskWrapperBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+       */
+      public Builder clearTaskWrapper() {
+        if (taskWrapperBuilder_ == null) {
+          taskWrapper_ = null;
+          onChanged();
+        } else {
+          taskWrapperBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+       */
+      public com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper.Builder getTaskWrapperBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getTaskWrapperFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+       */
+      public com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapperOrBuilder getTaskWrapperOrBuilder() {
+        if (taskWrapperBuilder_ != null) {
+          return taskWrapperBuilder_.getMessageOrBuilder();
+        } else {
+          return taskWrapper_ == null ?
+              com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper.getDefaultInstance() : taskWrapper_;
+        }
+      }
+      /**
+       * <code>optional .com.bbles.automator.node.protobuf.TaskWrapper taskWrapper = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper, com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper.Builder, com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapperOrBuilder> 
+          getTaskWrapperFieldBuilder() {
+        if (taskWrapperBuilder_ == null) {
+          taskWrapperBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper, com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapper.Builder, com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskWrapperOrBuilder>(
+                  getTaskWrapper(),
+                  getParentForChildren(),
+                  isClean());
+          taskWrapper_ = null;
+        }
+        return taskWrapperBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.bbles.automator.node.protobuf.TaskDescriptor)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.bbles.automator.node.protobuf.TaskDescriptor)
+    private static final com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor();
+    }
+
+    public static com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<TaskDescriptor>
+        PARSER = new com.google.protobuf.AbstractParser<TaskDescriptor>() {
+      public TaskDescriptor parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TaskDescriptor(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<TaskDescriptor> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TaskDescriptor> getParserForType() {
+      return PARSER;
+    }
+
+    public com.bbles.automator.node.protobuf.ClientMasterProtocol.TaskDescriptor getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_bbles_automator_node_protobuf_ClientKernelAuthenticate_descriptor;
   private static final 
@@ -6336,6 +7111,11 @@ public final class ClientMasterProtocol {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_bbles_automator_node_protobuf_TaskOutput_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_bbles_automator_node_protobuf_TaskDescriptor_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_bbles_automator_node_protobuf_TaskDescriptor_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -6362,10 +7142,13 @@ public final class ClientMasterProtocol {
       "tput\030\001 \001(\t\"\202\001\n\nTaskOutput\0229\n\006stdout\030\001 \001(" +
       "\0132).com.bbles.automator.node.protobuf.ST" +
       "DOUT\0229\n\006errout\030\002 \001(\0132).com.bbles.automat" +
-      "or.node.protobuf.ERROUT2\201\001\n\023ClientMaster" +
-      "Service\022j\n\007execute\022..com.bbles.automator" +
-      ".node.protobuf.TaskWrapper\032-.com.bbles.a" +
-      "utomator.node.protobuf.TaskOutput0\001"
+      "or.node.protobuf.ERROUT\"e\n\016TaskDescripto" +
+      "r\022\016\n\006taskId\030\001 \002(\t\022C\n\013taskWrapper\030\002 \001(\0132." +
+      ".com.bbles.automator.node.protobuf.TaskW" +
+      "rapper2\202\001\n\023ClientMasterService\022k\n\006submit" +
+      "\022..com.bbles.automator.node.protobuf.Tas" +
+      "kWrapper\0321.com.bbles.automator.node.prot" +
+      "obuf.TaskDescriptor"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6427,6 +7210,12 @@ public final class ClientMasterProtocol {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_bbles_automator_node_protobuf_TaskOutput_descriptor,
         new java.lang.String[] { "Stdout", "Errout", });
+    internal_static_com_bbles_automator_node_protobuf_TaskDescriptor_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_com_bbles_automator_node_protobuf_TaskDescriptor_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_bbles_automator_node_protobuf_TaskDescriptor_descriptor,
+        new java.lang.String[] { "TaskId", "TaskWrapper", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

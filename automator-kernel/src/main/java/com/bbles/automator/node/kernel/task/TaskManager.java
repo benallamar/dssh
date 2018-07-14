@@ -4,16 +4,21 @@ import com.bbles.automator.node.kernel.action.SystemCall;
 import com.bbles.automator.node.kernel.action.SystemCallHandler;
 import com.bbles.automator.node.kernel.config.Configuration;
 
+import java.time.LocalDateTime;
 import java.util.PriorityQueue;
+import java.util.Random;
 import java.util.concurrent.PriorityBlockingQueue;
 
 public class TaskManager extends Thread {
     private SystemCallHandler kernel;
-    private PriorityBlockingQueue<TaskWrapper> queue;
+    private PriorityBlockingQueue<TaskDescriptor> queue;
     private Configuration config;
 
-    public void addTask(TaskWrapper taskWrapper) {
-        queue.add(taskWrapper);
+    public TaskDescriptor addTask(TaskWrapper taskWrapper) {
+        String taskId = generateTaskId();
+        TaskDescriptor taskDescriptor = new TaskDescriptor(taskId, taskWrapper);
+        queue.add(taskDescriptor);
+        return taskDescriptor;
     }
 
 
@@ -29,7 +34,7 @@ public class TaskManager extends Thread {
      *
      * @return
      */
-    public TaskWrapper getTaskWrapper() {
+    public TaskDescriptor getNextTask() {
         return queue.poll();
     }
 
@@ -40,9 +45,14 @@ public class TaskManager extends Thread {
     public void run() {
         while (true) {
             try {
+                /**
+                 * We send the task sequentially (they could be managed to be done automatically)
+                 * TODO: What about sending the requests using many threads ? Would it be a
+                 * resource consuming for the resources that we have by default ?
+                 */
                 if (waitingTask() > 0) {
-                    TaskWrapper tskWrapper = getTaskWrapper();
-                    kernel.execute(tskWrapper, null);
+                    TaskDescriptor td = getNextTask();
+                    kernel.getProcessorManager().submit(td.getTaskWrapper());
                 } else {
                     // We sleep waiting for other tasks to come
                     Thread.sleep(2000);
@@ -51,5 +61,9 @@ public class TaskManager extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+
+    public String generateTaskId() {
+        return LocalDateTime.now().toString();
     }
 }

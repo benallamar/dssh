@@ -46,6 +46,10 @@ message TaskOutput {
     optional ERROUT errout = 2;
 }
 
+message TaskDescriptor{
+    required string taskId  = 1;
+    optional TaskWrapper taskWrapper = 2;
+}
 service ClientMasterService {
-    rpc execute (TaskWrapper) returns (stream TaskOutput);
+    rpc submit (TaskWrapper) returns (TaskDescriptor);
 }

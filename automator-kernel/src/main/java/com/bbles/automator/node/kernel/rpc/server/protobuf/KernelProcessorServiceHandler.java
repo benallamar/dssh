@@ -1,6 +1,5 @@
 package com.bbles.automator.node.kernel.rpc.server.protobuf;
 
-import com.bbles.automator.node.kernel.ClientOutputStreamObserver;
 import com.bbles.automator.node.kernel.action.InterruptHandler;
 import com.bbles.automator.node.kernel.rpc.server.BindableServiceWithPort;
 import com.bbles.automator.node.kernel.task.Task;
@@ -34,13 +33,10 @@ public final class KernelProcessorServiceHandler extends KernelProcessorServiceG
             classTask
                     .newInstance()
                     .setCommand(request.getTask().getCommand())
-                    .setArgs(request.getTask().getArgs().split(" "))
-                    .execute(new ClientOutputStreamObserver<ClientMasterProtocol.TaskOutput>(responseObserver));
+                    .setArgs(request.getTask().getArgs().split(" "));
         } catch (InstantiationException e) {
             responseObserver.onError(e);
         } catch (IllegalAccessException e) {
-            responseObserver.onError(e);
-        } catch (IOException e) {
             responseObserver.onError(e);
         }
 

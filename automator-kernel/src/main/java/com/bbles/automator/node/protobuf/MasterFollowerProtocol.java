@@ -2147,11 +2147,11 @@ public final class MasterFollowerProtocol {
       "\036ProcessorKernelDelegationToken\022\r\n\005token" +
       "\030\001 \002(\014\022\014\n\004name\030\002 \002(\t\"Z\n\017TaskRepresenter\022" +
       "\020\n\010taskType\030\001 \002(\t\0225\n\004task\030\002 \002(\0132\'.com.bb" +
-      "les.automator.node.protobuf.Task2\210\001\n\026Ker" +
-      "nelProcessorService\022n\n\007execute\0222.com.bbl" +
-      "es.automator.node.protobuf.TaskRepresent" +
-      "er\032-.com.bbles.automator.node.protobuf.T" +
-      "askOutput0\001P\000"
+      "les.automator.node.protobuf.Task2\205\001\n\026Ker" +
+      "nelProcessorService\022k\n\006submit\022..com.bble" +
+      "s.automator.node.protobuf.TaskWrapper\0321." +
+      "com.bbles.automator.node.protobuf.TaskDe" +
+      "scriptorP\000"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

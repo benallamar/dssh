@@ -2,13 +2,14 @@ package com.bbles.automator.client;
 
 import com.bbles.automator.node.kernel.config.Configuration;
 import com.bbles.automator.node.kernel.rpc.client.protobuf.MasterClientSideHandler;
-import com.bbles.automator.node.kernel.rpc.protocol.ClientKernelProtocol;
 import com.bbles.automator.node.kernel.rpc.proxy.ClientMasterProxy;
+import com.bbles.automator.node.kernel.task.Task;
+import com.bbles.automator.node.kernel.task.TaskWrapper;
 
 
 public class ClientAgent {
     private Configuration config;
-    private ClientMasterProxy master;
+    private ClientMasterProxy<MasterClientSideHandler> master;
     private ClientAgentOptions options;
 
     public ClientAgent(Configuration config, ClientAgentOptions options) {
@@ -24,10 +25,8 @@ public class ClientAgent {
     /**
      * Execute the command
      */
-    public void execute() {
-        //  master.getProxy()
-        //         .getChannel()
-        //        .execute(options.getCommand(), options.getCommandArgument());
+    public void submit(TaskWrapper taskWrapper) {
+        master.getProxy().getChannel().submit(taskWrapper);
     }
 
     /**
@@ -36,5 +35,25 @@ public class ClientAgent {
      */
     public static ClientAgent setupShellConnection(Configuration configuration, ClientAgentOptions options) {
         return new ClientAgent(configuration, options);
+    }
+
+    public static void main(String[] args) {
+        // Get the parsed options from the output
+        ClientAgentOptions options = new ClientAgentOptions(args);
+
+        Configuration config = null;
+        if (options.getConfigPath() != null) {
+            config = new Configuration(options.getConfigPath());
+        } else {
+            config = new Configuration();
+        }
+
+
+        TaskWrapper taskWrapper = options.getTaskWrapper();
+        // Instantiate the client
+        ClientAgent client = new ClientAgent(config, options);
+
+        // Execute the command
+        client.submit(taskWrapper);
     }
 }

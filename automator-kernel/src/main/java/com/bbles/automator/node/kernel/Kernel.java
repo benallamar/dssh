@@ -1,19 +1,16 @@
 package com.bbles.automator.node.kernel;
 
 import com.bbles.automator.node.kernel.action.InterruptHandler;
-import com.bbles.automator.node.kernel.action.SecurityHandler;
 import com.bbles.automator.node.kernel.action.SystemCallHandler;
 import com.bbles.automator.node.kernel.config.Configuration;
 import com.bbles.automator.node.kernel.processor.ProcessorManager;
 import com.bbles.automator.node.kernel.security.TokenManager;
-import com.bbles.automator.node.kernel.security.UserGroupManager;
+import com.bbles.automator.node.kernel.task.TaskDescriptor;
 import com.bbles.automator.node.kernel.task.TaskManager;
 import com.bbles.automator.node.kernel.task.TaskWrapper;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
-public class Kernel implements SystemCallHandler, SecurityHandler, InterruptHandler {
-    private Log logger = LogFactory.getLog(this.getClass());
+
+public class Kernel implements SystemCallHandler, InterruptHandler {
     private ProcessorManager processorManager;
     private TokenManager tokenManager;
     private KernelRPCServer kernelRPCServer;
@@ -21,8 +18,6 @@ public class Kernel implements SystemCallHandler, SecurityHandler, InterruptHand
 
     public Kernel(Configuration config) {
         this.kernelRPCServer = new KernelRPCServer(this, config);
-        this.tokenManager = new TokenManager(this, config);
-        this.processorManager = new ProcessorManager(this, config);
         this.taskManager = new TaskManager(this, config);
     }
 
@@ -31,7 +26,6 @@ public class Kernel implements SystemCallHandler, SecurityHandler, InterruptHand
      */
     public void start() {
         try {
-            logger.info("Start the Kernek server");
             kernelRPCServer.start();
             taskManager.start();
         } catch (Exception e) {
@@ -48,35 +42,20 @@ public class Kernel implements SystemCallHandler, SecurityHandler, InterruptHand
         }
     }
 
-    @Override
-    public void execute(TaskWrapper taskWrapper, OutputStreamObserver observer) throws Exception {
-        //TODO: Could we get stream inforamtion from this output (to be handled in safe mode)
-        processorManager.execute(taskWrapper, observer);
+    /**
+     * Send the task to the scheduler who will make best effort to execute
+     * the task in respect to the context given within the task
+     *
+     * @param taskWrapper
+     * @return
+     */
+    public TaskDescriptor schedule(TaskWrapper taskWrapper) {
+        return taskManager.addTask(taskWrapper);
     }
 
-
-    public void execute(TaskWrapper taskWrapper) {
-        taskManager.addTask(taskWrapper);
-    }
-
-    public UserGroupManager authenticate() {
-        return null;
-    }
-
-    public ProcessorManager getProcessorManager() {
-        return processorManager;
-    }
-
-    public TaskManager getTaskManager() {
-        return taskManager;
-    }
-
-    public TokenManager getTokenManager() {
-        return tokenManager;
-    }
-
-    public static void main(String[] args) {
-        Kernel kernel = new Kernel(new Configuration());
+    public static void main(String[] args){
+        Configuration config = new Configuration();
+        Kernel kernel = new Kernel(config);
         kernel.start();
     }
 }

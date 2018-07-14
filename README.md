@@ -1,5 +1,6 @@
-# dssh
-a centralized distributed executor
+# Automator
+A distributed-centralized executor systems to execute simple/secheduled tasks.
 
-# Implemented execution:
-ShellExecution
+## Warning:
+- Not production ready.
+- Contributing to the project is open, feel welcome.

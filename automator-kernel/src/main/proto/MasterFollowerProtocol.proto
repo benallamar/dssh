@@ -19,5 +19,5 @@ message TaskRepresenter {
 }
 
 service KernelProcessorService {
-    rpc execute (TaskRepresenter) returns (stream TaskOutput);
+    rpc pullTask (stream TaskWrapper) returns ();
 }

@@ -1,12 +1,8 @@
 package com.bbles.automator.node.kernel.rpc.server.protobuf;
 
-import com.bbles.automator.node.kernel.ClientOutputStreamObserver;
 import com.bbles.automator.node.kernel.action.SystemCallHandler;
 import com.bbles.automator.node.kernel.rpc.server.BindableServiceWithPort;
-import com.bbles.automator.node.kernel.task.Task;
-import com.bbles.automator.node.kernel.task.TaskContext;
-import com.bbles.automator.node.kernel.task.TaskContextBuilder;
-import com.bbles.automator.node.kernel.task.TaskWrapper;
+import com.bbles.automator.node.kernel.task.*;
 import com.bbles.automator.node.protobuf.ClientMasterProtocol;
 import com.bbles.automator.node.protobuf.ClientMasterServiceGrpc;
 import io.grpc.stub.StreamObserver;
@@ -28,8 +24,8 @@ public final class ClientMasterServerSideHandler extends ClientMasterServiceGrpc
         return port;
     }
 
-    public void execute(ClientMasterProtocol.TaskWrapper request,
-                        StreamObserver<ClientMasterProtocol.TaskOutput> responseObserver) {
+    public void submit(ClientMasterProtocol.TaskWrapper request,
+                       StreamObserver<ClientMasterProtocol.TaskDescriptor> responseObserver) {
         try {
             ClientMasterProtocol.TaskContext protoTaskContext = request.getCtx();
             TaskContext ctx = TaskContextBuilder
@@ -47,7 +43,13 @@ public final class ClientMasterServerSideHandler extends ClientMasterServiceGrpc
                     .setCommand(protoTask.getCommand())
                     .setArgs(protoTask.getArgs().split(" "));
             TaskWrapper taskWrapper = new TaskWrapper(ctx, tsk);
-            serverHandler.execute(taskWrapper, new ClientOutputStreamObserver<ClientMasterProtocol.TaskOutput>(responseObserver));
+            TaskDescriptor taskDescriptor = serverHandler.schedule(taskWrapper);
+            /**
+             * The client has already a version of the taskwrapper
+             * all he needs is only a task id to track his jobs
+             */
+            taskDescriptor.setTaskWrapper(null);
+            responseObserver.onNext(taskDescriptor.toProtobuf());
             responseObserver.onCompleted();
         } catch (Exception e) {
             responseObserver.onError(e);
