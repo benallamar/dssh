@@ -5,5 +5,4 @@ import com.bbles.automator.node.protobuf.KernelProcessorServiceGrpc;
 import io.grpc.stub.AbstractStub;
 
 public class FollowerMasterSideHandler {
-    private
 }

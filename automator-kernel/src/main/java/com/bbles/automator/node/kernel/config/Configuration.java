@@ -1,48 +1,27 @@
 package com.bbles.automator.node.kernel.config;
 
 import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
 
-public class Configuration {
-
-    private Config config;
-
-    public Configuration() {
-        config = ConfigFactory.load();
+public class Configuration extends Config {
+    @Override
+    public Configuration getInstance() {
+        new Configuration()
     }
 
-    public Configuration(String configurationLoader) {
-        config = ConfigFactory.load(configurationLoader);
-    }
 
-    /**
-     * Return the default configuration for a given node.
-     *
-     * @param className
-     * @return
-     */
-    public static Configuration getDefaultConfigurationByName(String className) {
-        return (Configuration) ConfigFactory.load(className);
-    }
-
-    public static Configuration getInstance() {
-        return (Configuration) ConfigFactory.defaultApplication();
-    }
-
-    public int get(String key, int defaultValue) {
+    public <T> T get(String key, T defaultValue) {
         try {
-            config.getInt(key);
+            if (defaultValue instanceof int) {
+                getInt(key);
+            } else if (defaultValue instanceof String) {
+                getString(key);
+            } else {
+                throw IllegalArgumentException;
+            }
         } finally {
             return defaultValue;
         }
     }
 
-    public String get(String key, String defaultValue) {
-        try {
-            config.getString(key);
-        } finally {
-            return defaultValue;
-        }
-    }
 
 }
