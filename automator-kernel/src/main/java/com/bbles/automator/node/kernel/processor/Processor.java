@@ -2,6 +2,8 @@ package com.bbles.automator.node.kernel.processor;
 
 import com.bbles.automator.node.kernel.action.SystemActionHandler;
 import com.bbles.automator.node.kernel.config.Configuration;
+import com.bbles.automator.node.kernel.http.ProcessorHttpServer;
+import com.bbles.automator.node.kernel.task.ExecutionManager;
 
 import java.net.InetAddress;
 
@@ -16,11 +18,14 @@ import java.net.InetAddress;
 public class Processor implements SystemActionHandler {
 
     private ProcessorRPCServer processorRPCServer;
+    private ExecutionManager executionManager;
+    private ProcessorHttpServer httpServer;
     private String host;
     private int port;
 
     public Processor(Configuration config) {
         processorRPCServer = new ProcessorRPCServer(this, config);
+        httpServer = new ProcessorHttpServer(this, config);
     }
 
     /**
@@ -42,6 +47,7 @@ public class Processor implements SystemActionHandler {
     public void start() {
         try {
             processorRPCServer.start();
+            httpServer.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,9 +60,14 @@ public class Processor implements SystemActionHandler {
     public void shutdown() {
         try {
             processorRPCServer.shutdown();
+            httpServer.stop();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public ExecutionManager getExecutionManager() {
+        return executionManager;
     }
 
     public int getPort() {

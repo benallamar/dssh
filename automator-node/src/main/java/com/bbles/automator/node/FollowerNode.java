@@ -6,6 +6,10 @@ import com.bbles.automator.node.kernel.processor.Processor;
 public class FollowerNode implements Node {
     private Processor processor;
 
+    public FollowerNode(Configuration config) {
+        this.processor = new Processor(config);
+    }
+
     @Override
     public NodeMode mode() {
         return NodeMode.FOLLOWER;
@@ -32,7 +36,8 @@ public class FollowerNode implements Node {
     }
 
     public static void main(String[] args) {
-        FollowerNode follower = new FollowerNode();
+        Configuration config = new Configuration();
+        FollowerNode follower = new FollowerNode(config);
         follower.start();
     }
 }

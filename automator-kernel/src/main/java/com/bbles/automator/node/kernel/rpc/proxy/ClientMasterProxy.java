@@ -4,6 +4,7 @@ import com.bbles.automator.node.kernel.config.Configuration;
 import com.bbles.automator.node.kernel.config.KernelConstants;
 import com.bbles.automator.node.kernel.rpc.client.RPClient;
 import com.bbles.automator.node.kernel.rpc.client.RPClientBuilder;
+import com.bbles.automator.node.kernel.rpc.protocol.ClientMasterProtocol;
 import com.bbles.automator.node.kernel.security.UserManager;
 import io.grpc.stub.AbstractStub;
 
@@ -16,7 +17,7 @@ import java.lang.reflect.Proxy;
  *
  * @param <T>
  */
-public class ClientMasterProxy<T extends AbstractStub> /* TODO: Add `extends Proxy`*/ {
+public class ClientMasterProxy<T extends ClientMasterProtocol> /* TODO: Add `extends Proxy`*/ {
     private UserManager mg;
     private RPClient<T> proxy;
 

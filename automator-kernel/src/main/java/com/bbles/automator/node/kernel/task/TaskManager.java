@@ -52,7 +52,7 @@ public class TaskManager extends Thread {
                  */
                 if (waitingTask() > 0) {
                     TaskDescriptor td = getNextTask();
-                    kernel.getProcessorManager().submit(td.getTaskWrapper());
+                    kernel.getProcessorManager().submit(td);
                 } else {
                     // We sleep waiting for other tasks to come
                     Thread.sleep(2000);

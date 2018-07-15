@@ -1,0 +1,41 @@
+syntax = "proto2";
+package com.bbles.automator.node.protobuf;
+option java_outer_classname = "GeneralProtocol";
+
+message TaskStatus {
+    required string status = 1;
+}
+
+message Task {
+    required string token = 1;
+    required string command = 2;
+    required string args = 3;
+    required string type = 4;
+}
+
+message TaskContext {
+    optional string startDate = 1;
+    optional string endDate = 2;
+    optional bool isScheduled = 3;
+    optional bool retryInError = 4;
+    optional int32 maxRetry = 5;
+}
+
+message TaskWrapper {
+    required string taskType = 3;
+    required TaskContext ctx = 1;
+    required Task tsk = 2;
+}
+
+message TaskDescriptor {
+    required string taskId = 1;
+    optional TaskWrapper taskWrapper = 2;
+}
+
+message JobSubmissionAck {
+    required int32 jobTotal = 1;
+}
+
+message ProcessorDescriptor {
+    required string dp = 1;
+}

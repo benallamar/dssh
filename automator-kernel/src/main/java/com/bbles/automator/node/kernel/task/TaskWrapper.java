@@ -1,9 +1,7 @@
 package com.bbles.automator.node.kernel.task;
 
 
-import com.bbles.automator.node.protobuf.ClientMasterProtocol;
-
-import java.io.IOException;
+import com.bbles.automator.node.protobuf.GeneralProtocol;
 
 // Describe a execution wrapper
 public class TaskWrapper extends Thread {
@@ -16,7 +14,7 @@ public class TaskWrapper extends Thread {
         this.tsk = tsk;
     }
 
-    public static TaskWrapper fromProtobuf(ClientMasterProtocol.TaskWrapper wrapper) {
+    public static TaskWrapper fromProtobuf(GeneralProtocol.TaskWrapper wrapper) {
         TaskContext ctx = TaskContext.fromProtobuf(wrapper.getCtx());
         Task tsk = Task.fromProtobuf(wrapper.getTsk());
         return new TaskWrapper(ctx, tsk);
@@ -36,14 +34,14 @@ public class TaskWrapper extends Thread {
      * @param taskWrapper
      * @return
      */
-    public static ClientMasterProtocol.TaskWrapper toProtobuf(TaskWrapper taskWrapper) {
-        return ClientMasterProtocol.TaskWrapper.newBuilder()
+    public static GeneralProtocol.TaskWrapper toProtobuf(TaskWrapper taskWrapper) {
+        return GeneralProtocol.TaskWrapper.newBuilder()
                 .setTsk(Task.toProtobuf(taskWrapper.getTask()))
                 .setCtx(TaskContext.toProtobuf(taskWrapper.getContext()))
                 .build();
     }
 
-    public ClientMasterProtocol.TaskWrapper toProtobuf() {
+    public GeneralProtocol.TaskWrapper toProtobuf() {
         return TaskWrapper.toProtobuf(this);
     }
 }

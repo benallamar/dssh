@@ -1,13 +1,14 @@
 package com.bbles.automator.node.kernel.rpc.client;
 
+import com.bbles.automator.node.kernel.rpc.protocol.ClientProtocol;
 import io.grpc.stub.AbstractStub;
 
 import javax.annotation.CheckForSigned;
 
-public class RPClientBuilder<T extends AbstractStub> {
+public class RPClientBuilder<T extends ClientProtocol> {
     private int port = 9999;
     private String host;
-    private Class<T> rpcHandler;
+    private Class<? extends AbstractStub> rpcHandler;
     private boolean blockinRPC = true;
 
     public static RPClientBuilder newBuild() {
@@ -24,7 +25,7 @@ public class RPClientBuilder<T extends AbstractStub> {
         return this;
     }
     @CheckForSigned
-    public RPClientBuilder withRPCHandler(Class<T> rpcHandler) {
+    public <S extends AbstractStub> RPClientBuilder withRPCHandler(Class<S> rpcHandler) {
         this.rpcHandler = rpcHandler;
         return this;
     }

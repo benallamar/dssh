@@ -3,8 +3,8 @@ package com.bbles.automator.node.kernel.rpc.server.protobuf;
 import com.bbles.automator.node.kernel.action.SystemCallHandler;
 import com.bbles.automator.node.kernel.rpc.server.BindableServiceWithPort;
 import com.bbles.automator.node.kernel.task.*;
-import com.bbles.automator.node.protobuf.ClientMasterProtocol;
 import com.bbles.automator.node.protobuf.ClientMasterServiceGrpc;
+import com.bbles.automator.node.protobuf.GeneralProtocol;
 import io.grpc.stub.StreamObserver;
 
 
@@ -24,10 +24,10 @@ public final class ClientMasterServerSideHandler extends ClientMasterServiceGrpc
         return port;
     }
 
-    public void submit(ClientMasterProtocol.TaskWrapper request,
-                       StreamObserver<ClientMasterProtocol.TaskDescriptor> responseObserver) {
+    public void submit(GeneralProtocol.TaskWrapper request,
+                       StreamObserver<GeneralProtocol.TaskDescriptor> responseObserver) {
         try {
-            ClientMasterProtocol.TaskContext protoTaskContext = request.getCtx();
+            GeneralProtocol.TaskContext protoTaskContext = request.getCtx();
             TaskContext ctx = TaskContextBuilder
                     .newBuild()
                     .withStartDate(protoTaskContext.getStartDate())
@@ -36,9 +36,9 @@ public final class ClientMasterServerSideHandler extends ClientMasterServiceGrpc
                     .retryInError(protoTaskContext.getRetryInError())
                     .withMaxRetry(protoTaskContext.getMaxRetry())
                     .build();
-            ClientMasterProtocol.Task protoTask = request.getTsk();
+            GeneralProtocol.Task protoTask = request.getTsk();
             Task tsk = Task
-                    .loadTask(request.getTskDescriptor())
+                    .loadTask(request.getTaskType())
                     .newInstance()
                     .setCommand(protoTask.getCommand())
                     .setArgs(protoTask.getArgs().split(" "));

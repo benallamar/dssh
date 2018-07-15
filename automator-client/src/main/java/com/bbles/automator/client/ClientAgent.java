@@ -3,8 +3,9 @@ package com.bbles.automator.client;
 import com.bbles.automator.node.kernel.config.Configuration;
 import com.bbles.automator.node.kernel.rpc.client.protobuf.MasterClientSideHandler;
 import com.bbles.automator.node.kernel.rpc.proxy.ClientMasterProxy;
-import com.bbles.automator.node.kernel.task.Task;
+import com.bbles.automator.node.kernel.task.TaskDescriptor;
 import com.bbles.automator.node.kernel.task.TaskWrapper;
+import org.apache.commons.cli.ParseException;
 
 
 public class ClientAgent {
@@ -25,8 +26,8 @@ public class ClientAgent {
     /**
      * Execute the command
      */
-    public void submit(TaskWrapper taskWrapper) {
-        master.getProxy().getChannel().submit(taskWrapper);
+    public TaskDescriptor submit(TaskWrapper taskWrapper) {
+        return new TaskDescriptor("", null);
     }
 
     /**
@@ -39,21 +40,24 @@ public class ClientAgent {
 
     public static void main(String[] args) {
         // Get the parsed options from the output
-        ClientAgentOptions options = new ClientAgentOptions(args);
+        try {
+            ClientAgentOptions options = new ClientAgentOptions(args);
 
-        Configuration config = null;
-        if (options.getConfigPath() != null) {
-            config = new Configuration(options.getConfigPath());
-        } else {
-            config = new Configuration();
+            Configuration config;
+            if (options.getConfigDir() != null) {
+                config = new Configuration(options.getConfigDir());
+            } else {
+                config = new Configuration();
+            }
+
+            TaskWrapper taskWrapper = options.getTaskWrapper();
+            // Instantiate the client
+            ClientAgent client = new ClientAgent(config, options);
+
+            // Execute the command
+            client.submit(taskWrapper);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-
-
-        TaskWrapper taskWrapper = options.getTaskWrapper();
-        // Instantiate the client
-        ClientAgent client = new ClientAgent(config, options);
-
-        // Execute the command
-        client.submit(taskWrapper);
     }
 }

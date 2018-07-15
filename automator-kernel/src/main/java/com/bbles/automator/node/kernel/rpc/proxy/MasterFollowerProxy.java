@@ -1,11 +1,8 @@
 package com.bbles.automator.node.kernel.rpc.proxy;
 
-import com.bbles.automator.node.kernel.rpc.client.RPClient;
-import com.bbles.automator.node.kernel.rpc.client.protobuf.FollowerMasterSideHandler;
 import com.bbles.automator.node.kernel.task.TaskOutput;
 import com.bbles.automator.node.kernel.task.TaskWrapper;
-import com.bbles.automator.node.protobuf.ClientMasterProtocol;
-import com.bbles.automator.node.protobuf.MasterFollowerProtocol;
+import com.bbles.automator.node.protobuf.GeneralProtocol;
 
 import java.util.Iterator;
 
@@ -17,8 +14,7 @@ public class MasterFollowerProxy {
          * Should they get what they have to do
          * Get the data from the cluster to get the result of the server
          */
-        ClientMasterProtocol.TaskWrapper taskWrapper1 = TaskWrapper.toProtobuf(taskWrapper);
-        //follower.getChannel().execute(taskWrapper);
+        GeneralProtocol.TaskWrapper taskWrapper1 = TaskWrapper.toProtobuf(taskWrapper);
         return null;
     }
 }

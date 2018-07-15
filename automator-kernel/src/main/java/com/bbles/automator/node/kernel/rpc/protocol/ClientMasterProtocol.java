@@ -1,13 +1,12 @@
 package com.bbles.automator.node.kernel.rpc.protocol;
 
 
-import com.bbles.automator.node.kernel.action.SystemCallHandler;
-import com.bbles.automator.node.kernel.task.TaskOutput;
+import com.bbles.automator.node.kernel.task.TaskDescriptor;
 import com.bbles.automator.node.kernel.task.TaskWrapper;
 
 import java.io.IOException;
 
-public interface ClientKernelProtocol extends SystemCallHandler {
+public interface ClientMasterProtocol extends ClientProtocol {
 
     /**
      * For the time being we considere blocked execution
@@ -15,5 +14,5 @@ public interface ClientKernelProtocol extends SystemCallHandler {
      * @param taskWrapper
      * @throws IOException
      */
-    TaskOutput execute(TaskWrapper taskWrapper) throws IOException;
+    TaskDescriptor submit(TaskWrapper taskWrapper);
 }

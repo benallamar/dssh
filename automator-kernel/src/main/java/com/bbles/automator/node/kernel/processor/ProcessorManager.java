@@ -26,12 +26,17 @@ public class ProcessorManager {
         this.config = config;
     }
 
-    public void submit(ProcessorSelector selector, TaskDescriptor td) {
+    public void submit(TaskDescriptor td) {
         //TODO: Improve this to be parallel processing
+        ProcessorSelector selector = td.getSelector();
         for (ProcessorDescriptor pd : processorDescriptors) {
             if (selector.doesMatch(pd.getProcessor())) {
-                pd.submit(td.getTaskWrapper());
+                pd.submit(td);
             }
         }
+    }
+
+    public ProcessorDescriptor getProcessorDescriptor(String s) {
+        return processorDescriptors.get(0);
     }
 }

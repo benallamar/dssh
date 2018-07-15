@@ -1,12 +1,11 @@
 package com.bbles.automator.node.kernel.rpc.client.protobuf;
 
+import com.bbles.automator.node.kernel.rpc.protocol.ClientMasterProtocol;
 import com.bbles.automator.node.kernel.task.*;
-import com.bbles.automator.node.protobuf.ClientMasterProtocol;
 import com.bbles.automator.node.protobuf.ClientMasterServiceGrpc;
+import com.bbles.automator.node.protobuf.GeneralProtocol;
 
-import java.util.Iterator;
-
-public class MasterClientSideHandler {
+public class MasterClientSideHandler implements ClientMasterProtocol {
     private ClientMasterServiceGrpc.ClientMasterServiceBlockingStub channel;
 
 
@@ -14,28 +13,20 @@ public class MasterClientSideHandler {
         this.channel = channel;
     }
 
-    /**
-     * Collect a stream of data from the output
-     *
-     * @param output
-     * @param taskWrapper TaskWrapper that holds all the information about the task to be executed
-     */
-    public void submit(TaskWrapper taskWrapper) {
+    public TaskDescriptor submit(TaskWrapper taskWrapper) {
         try {
-            ClientMasterProtocol.Task tskProto = Task.toProtobuf(taskWrapper.getTask());
-            ClientMasterProtocol.TaskContext ctxProto = TaskContext.toProtobuf(taskWrapper.getContext());
-            ClientMasterProtocol.TaskWrapper tskWrapper =
-                    ClientMasterProtocol.TaskWrapper
+            GeneralProtocol.Task tskProto = Task.toProtobuf(taskWrapper.getTask());
+            GeneralProtocol.TaskContext ctxProto = TaskContext.toProtobuf(taskWrapper.getContext());
+            GeneralProtocol.TaskWrapper tskWrapper =
+                    GeneralProtocol.TaskWrapper
                             .newBuilder()
                             .setTsk(tskProto)
                             .setCtx(ctxProto)
                             .build();
-            Iterator<ClientMasterProtocol.TaskOutput> outputs = channel.execute(tskWrapper);
-            while (outputs.hasNext()) {
-                TaskOutput.fromProtobuf(outputs.next());
-            }
+            return TaskDescriptor.fromProtobuf(channel.submit(tskWrapper));
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 }

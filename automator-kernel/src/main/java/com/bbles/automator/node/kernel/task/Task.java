@@ -1,9 +1,7 @@
 package com.bbles.automator.node.kernel.task;
 
 import com.bbles.automator.node.kernel.task.shell.ShellTask;
-import com.bbles.automator.node.protobuf.ClientMasterProtocol;
-
-import java.io.IOException;
+import com.bbles.automator.node.protobuf.GeneralProtocol;
 
 public abstract class Task{
 
@@ -12,7 +10,7 @@ public abstract class Task{
      *
      * @param tsk
      */
-    public static <T extends Task> T fromProtobuf(ClientMasterProtocol.Task tsk) {
+    public static <T extends Task> T fromProtobuf(GeneralProtocol.Task tsk) {
         Class<? extends Task> klass = Task.loadTask(tsk.getType());
         try {
             return (T) klass.getConstructor(String.class, String[].class)
@@ -78,8 +76,8 @@ public abstract class Task{
         }
     }
 
-    public static ClientMasterProtocol.Task toProtobuf(Task tsk) {
-        return ClientMasterProtocol.Task.newBuilder()
+    public static GeneralProtocol.Task toProtobuf(Task tsk) {
+        return GeneralProtocol.Task.newBuilder()
                 .setArgs(tsk.getArgsString())
                 .setCommand(tsk.getCommand())
                 .build();

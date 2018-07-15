@@ -3,9 +3,10 @@ package com.bbles.automator.node.kernel;
 import com.bbles.automator.node.kernel.config.Configuration;
 import com.bbles.automator.node.kernel.config.KernelConstants;
 import com.bbles.automator.node.kernel.rpc.server.protobuf.ClientMasterServerSideHandler;
-import com.bbles.automator.node.kernel.rpc.server.protobuf.KernelProcessorServiceHandler;
+import com.bbles.automator.node.kernel.rpc.server.protobuf.ClientFollowerServerSideHandler;
 import com.bbles.automator.node.kernel.rpc.server.RPCServer;
 import com.bbles.automator.node.kernel.rpc.server.BindableServiceWithPort;
+import com.bbles.automator.node.kernel.rpc.server.protobuf.FollowerMasterServerSideHandler;
 
 
 /**
@@ -27,7 +28,7 @@ public class KernelRPCServer extends RPCServer {
     public BindableServiceWithPort[] services() {
         // TODO: Move this to a more reflective way to get class
         // In order to have more configured way
-        return new BindableServiceWithPort[]{new ClientMasterServerSideHandler(kernel, clientRpcPort), new KernelProcessorServiceHandler(kernel, processorRpcPort)};
+        return new BindableServiceWithPort[]{new ClientMasterServerSideHandler(kernel, clientRpcPort), new FollowerMasterServerSideHandler(kernel, processorRpcPort)};
     }
 
     /**

@@ -1,38 +1,31 @@
 package com.bbles.automator.client;
 
-import com.bbles.automator.node.kernel.config.Configuration;
 import com.bbles.automator.node.kernel.task.TaskContext;
 import com.bbles.automator.node.kernel.task.TaskContextBuilder;
 import com.bbles.automator.node.kernel.task.TaskWrapper;
 import com.bbles.automator.node.kernel.task.shell.ShellTask;
-import com.sun.deploy.util.ArgumentParsingUtil;
-import net.source
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Options;
+import org.apache.commons.cli.*;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.MissingFormatArgumentException;
 
 public class ClientAgentOptions {
+    private String configDir;
     private String command;
     private String[] args;
     private String startDate;
     private String endDate;
     private String context;
 
-    public ClientAgentOptions(String[] argvs) {
+    public ClientAgentOptions(String[] argvs) throws ParseException {
         Options options = new Options();
-        options.addOption("--command", "Command to be executed")
-                .addOption("--context", "Add task context");
+        options.addOption("--command", "Command to be executed").addOption("--context", "Add task context");
+
         CommandLine cli = new DefaultParser().parse(options, argvs);
         if (cli.hasOption("command")) {
             String[] targs = cli.getOptionValue("command").split(" ");
             this.command = targs[0];
-            this.args = Arrays.copyOfRange(targs, 1, targs.length() - 1);
+            this.args = Arrays.copyOfRange(targs, 1, targs.length - 1);
         } else {
             throw new MissingFormatArgumentException("The command is missing");
         }
@@ -63,11 +56,14 @@ public class ClientAgentOptions {
                 .withStartDate(startDate)
                 .withEndDate(endDate)
                 .build();
-        return new TaskWrapper(new ShellTask(getCommand(), getCommandArgument()), context);
+        return new TaskWrapper(context, new ShellTask(getCommand(), getCommandArgument()));
     }
 
     //TODO: Check the properties of the jvm if there any path to where the configuration has been saved
-    public String getConfigPath() {
-        return System.getProperty("automator.config.dir");
+    public String getConfigDir() {
+        if (configDir == null) {
+            configDir = System.getProperty("automator.config.dir");
+        }
+        return configDir;
     }
 }

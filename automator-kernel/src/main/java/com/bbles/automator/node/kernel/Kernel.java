@@ -1,6 +1,7 @@
 package com.bbles.automator.node.kernel;
 
 import com.bbles.automator.node.kernel.action.InterruptHandler;
+import com.bbles.automator.node.kernel.action.SecurityHandler;
 import com.bbles.automator.node.kernel.action.SystemCallHandler;
 import com.bbles.automator.node.kernel.config.Configuration;
 import com.bbles.automator.node.kernel.processor.ProcessorManager;
@@ -10,7 +11,7 @@ import com.bbles.automator.node.kernel.task.TaskManager;
 import com.bbles.automator.node.kernel.task.TaskWrapper;
 
 
-public class Kernel implements SystemCallHandler, InterruptHandler {
+public class Kernel implements SystemCallHandler, InterruptHandler, SecurityHandler {
     private ProcessorManager processorManager;
     private TokenManager tokenManager;
     private KernelRPCServer kernelRPCServer;
@@ -19,8 +20,19 @@ public class Kernel implements SystemCallHandler, InterruptHandler {
     public Kernel(Configuration config) {
         this.kernelRPCServer = new KernelRPCServer(this, config);
         this.taskManager = new TaskManager(this, config);
+        this.processorManager = new ProcessorManager(this, config);
+        this.tokenManager = new TokenManager(this, config);
     }
 
+    @Override
+    public ProcessorManager getProcessorManager() {
+        return processorManager;
+    }
+
+
+    public TokenManager getTokenManager(){
+        return tokenManager;
+    }
     /**
      * Start the serveur
      */
@@ -53,7 +65,7 @@ public class Kernel implements SystemCallHandler, InterruptHandler {
         return taskManager.addTask(taskWrapper);
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Configuration config = new Configuration();
         Kernel kernel = new Kernel(config);
         kernel.start();

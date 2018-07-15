@@ -1,6 +1,6 @@
 package com.bbles.automator.node.kernel.task;
 
-import com.bbles.automator.node.protobuf.ClientMasterProtocol;
+import com.bbles.automator.node.protobuf.GeneralProtocol;
 import com.bbles.automator.node.utils.AutomatorUtils;
 
 import java.util.Date;
@@ -49,12 +49,12 @@ public class TaskContext {
         this.maxRetry = maxRetry;
     }
 
-    public static TaskContext fromProtobuf(ClientMasterProtocol.TaskContext ctx) {
+    public static TaskContext fromProtobuf(GeneralProtocol.TaskContext ctx) {
         return new TaskContext(ctx.getStartDate(), ctx.getEndDate(), ctx.getIsScheduled(), ctx.getRetryInError(), ctx.getMaxRetry());
     }
 
-    public static ClientMasterProtocol.TaskContext toProtobuf(TaskContext ctx) {
-        return ClientMasterProtocol.TaskContext.newBuilder()
+    public static GeneralProtocol.TaskContext toProtobuf(TaskContext ctx) {
+        return GeneralProtocol.TaskContext.newBuilder()
                 .setStartDate(ctx.getStartDateTime())
                 .setEndDate(ctx.getEndDateTime())
                 .setIsScheduled(ctx.isScheduled())
