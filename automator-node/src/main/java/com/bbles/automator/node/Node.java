@@ -4,13 +4,13 @@ package com.bbles.automator.node;
  * Main class
  */
 public interface Node {
-    public String info();
+  String info();
 
-    public String version();
+  String version();
 
-    public NodeMode mode();
+  NodeMode mode();
 
-    public void start();
+  void start();
 
-    public void shutdown();
+  void shutdown();
 }

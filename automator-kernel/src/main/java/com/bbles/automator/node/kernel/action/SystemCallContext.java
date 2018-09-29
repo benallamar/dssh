@@ -8,8 +8,22 @@
 
 package com.bbles.automator.node.kernel.action;
 
-public interface SystemCall {
-  SystemCallContext getContext();
+/**
+ * Give more description about the task that should be executed
+ * <p>
+ * Time, duration, ...
+ */
+public interface SystemCallContext {
 
-  SystemAction getAction();
+  String getStartDateTime();
+
+
+  String getEndDateTime();
+
+
+  boolean isScheduled();
+
+  boolean getRetryInError();
+
+  int getMaxRetry();
 }

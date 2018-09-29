@@ -1,6 +1,6 @@
-package com.bbles.automator.node.kernel.task.shell;
+package com.bbles.automator.client.task.shell;
 
-import com.bbles.automator.node.kernel.task.Task;
+import com.bbles.automator.client.task.Task;
 import com.bbles.automator.node.utils.AutomatorUtils;
 
 import java.io.IOException;

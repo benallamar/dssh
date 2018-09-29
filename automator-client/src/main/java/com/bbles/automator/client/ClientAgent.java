@@ -1,20 +1,17 @@
 package com.bbles.automator.client;
 
+import com.bbles.automator.client.rpc.protobuf.MasterClientSideHandler;
+import com.bbles.automator.client.task.TaskWrapper;
 import com.bbles.automator.node.kernel.config.Configuration;
-import com.bbles.automator.node.kernel.rpc.client.protobuf.MasterClientSideHandler;
-import com.bbles.automator.node.kernel.rpc.proxy.ClientMasterProxy;
 import com.bbles.automator.node.kernel.task.TaskDescriptor;
-import com.bbles.automator.node.kernel.task.TaskWrapper;
 import org.apache.commons.cli.ParseException;
 
 
 public class ClientAgent {
     private Configuration config;
-    private ClientMasterProxy<MasterClientSideHandler> master;
     private ClientAgentOptions options;
 
     public ClientAgent(Configuration config, ClientAgentOptions options) {
-        this.master = new ClientMasterProxy<>(config);
         this.config = config;
         this.options = options;
     }

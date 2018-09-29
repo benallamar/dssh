@@ -1,4 +1,4 @@
-package com.bbles.automator.node.kernel.task;
+package com.bbles.automator.client.task;
 
 import java.time.Instant;
 import java.util.Date;

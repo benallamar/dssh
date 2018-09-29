@@ -24,11 +24,11 @@ public final class ClientMasterProtocol {
   static {
     java.lang.String[] descriptorData = {
       "\n\032ClientMasterProtocol.proto\022!com.bbles." +
-      "automator.node.protobuf\032\rgeneral.proto2\202" +
-      "\001\n\023ClientMasterService\022k\n\006submit\022..com.b" +
-      "bles.automator.node.protobuf.TaskWrapper" +
-      "\0321.com.bbles.automator.node.protobuf.Tas" +
-      "kDescriptorP\000"
+      "automator.node.protobuf\032\rgeneral.proto2\201" +
+      "\001\n\023ClientMasterService\022j\n\007execute\022..com." +
+      "bbles.automator.node.protobuf.TaskWrappe" +
+      "r\032-.com.bbles.automator.node.protobuf.Ta" +
+      "skOutput0\001P\000"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

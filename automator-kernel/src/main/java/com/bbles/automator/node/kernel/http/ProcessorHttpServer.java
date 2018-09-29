@@ -12,20 +12,23 @@ import org.eclipse.jetty.servlet.ServletHandler;
  * them
  */
 public class ProcessorHttpServer extends Server {
-    private Processor processor;
+  private Processor processor;
 
-    public ProcessorHttpServer(Processor processor, Configuration config) {
-        super(
-                config.get(ProcessorConstants.PROCESSOR_HTTP_SERVER_PORT,
-                        ProcessorConstants.DEFAULT_PROCESSOR_HTTP_SERVER_PORT)
-        );
-        this.processor = processor;
-        initRequestHandler();
-    }
+  public ProcessorHttpServer(Processor processor, Configuration config) {
+    super(
+        config.get(ProcessorConstants.PROCESSOR_HTTP_SERVER_PORT,
+            ProcessorConstants.DEFAULT_PROCESSOR_HTTP_SERVER_PORT)
+    );
+    this.processor = processor;
+    initRequestHandler();
+  }
 
-    private void initRequestHandler() {
-        ServletHandler handler = new ServletHandler();
-        handler.addServletWithMapping(LogServletHandler.class, "/logs");
-        setHandler(handler);
-    }
+  /**
+   * Instantiate request asked by the clients
+   */
+  private void initRequestHandler() {
+    ServletHandler handler = new ServletHandler();
+    handler.addServletWithMapping(LogServletHandler.class, "/logs");
+    setHandler(handler);
+  }
 }

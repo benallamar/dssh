@@ -28,41 +28,41 @@ public final class ClientMasterServiceGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  @java.lang.Deprecated // Use {@link #getSubmitMethod()} instead. 
+  @java.lang.Deprecated // Use {@link #getExecuteMethod()} instead. 
   public static final io.grpc.MethodDescriptor<com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper,
-      com.bbles.automator.node.protobuf.GeneralProtocol.TaskDescriptor> METHOD_SUBMIT = getSubmitMethodHelper();
+      com.bbles.automator.node.protobuf.GeneralProtocol.TaskOutput> METHOD_EXECUTE = getExecuteMethodHelper();
 
   private static volatile io.grpc.MethodDescriptor<com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper,
-      com.bbles.automator.node.protobuf.GeneralProtocol.TaskDescriptor> getSubmitMethod;
+      com.bbles.automator.node.protobuf.GeneralProtocol.TaskOutput> getExecuteMethod;
 
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
   public static io.grpc.MethodDescriptor<com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper,
-      com.bbles.automator.node.protobuf.GeneralProtocol.TaskDescriptor> getSubmitMethod() {
-    return getSubmitMethodHelper();
+      com.bbles.automator.node.protobuf.GeneralProtocol.TaskOutput> getExecuteMethod() {
+    return getExecuteMethodHelper();
   }
 
   private static io.grpc.MethodDescriptor<com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper,
-      com.bbles.automator.node.protobuf.GeneralProtocol.TaskDescriptor> getSubmitMethodHelper() {
-    io.grpc.MethodDescriptor<com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper, com.bbles.automator.node.protobuf.GeneralProtocol.TaskDescriptor> getSubmitMethod;
-    if ((getSubmitMethod = ClientMasterServiceGrpc.getSubmitMethod) == null) {
+      com.bbles.automator.node.protobuf.GeneralProtocol.TaskOutput> getExecuteMethodHelper() {
+    io.grpc.MethodDescriptor<com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper, com.bbles.automator.node.protobuf.GeneralProtocol.TaskOutput> getExecuteMethod;
+    if ((getExecuteMethod = ClientMasterServiceGrpc.getExecuteMethod) == null) {
       synchronized (ClientMasterServiceGrpc.class) {
-        if ((getSubmitMethod = ClientMasterServiceGrpc.getSubmitMethod) == null) {
-          ClientMasterServiceGrpc.getSubmitMethod = getSubmitMethod = 
-              io.grpc.MethodDescriptor.<com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper, com.bbles.automator.node.protobuf.GeneralProtocol.TaskDescriptor>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+        if ((getExecuteMethod = ClientMasterServiceGrpc.getExecuteMethod) == null) {
+          ClientMasterServiceGrpc.getExecuteMethod = getExecuteMethod = 
+              io.grpc.MethodDescriptor.<com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper, com.bbles.automator.node.protobuf.GeneralProtocol.TaskOutput>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(
-                  "com.bbles.automator.node.protobuf.ClientMasterService", "submit"))
+                  "com.bbles.automator.node.protobuf.ClientMasterService", "execute"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.bbles.automator.node.protobuf.GeneralProtocol.TaskDescriptor.getDefaultInstance()))
-                  .setSchemaDescriptor(new ClientMasterServiceMethodDescriptorSupplier("submit"))
+                  com.bbles.automator.node.protobuf.GeneralProtocol.TaskOutput.getDefaultInstance()))
+                  .setSchemaDescriptor(new ClientMasterServiceMethodDescriptorSupplier("execute"))
                   .build();
           }
         }
      }
-     return getSubmitMethod;
+     return getExecuteMethod;
   }
 
   /**
@@ -94,20 +94,20 @@ public final class ClientMasterServiceGrpc {
 
     /**
      */
-    public void submit(com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper request,
-        io.grpc.stub.StreamObserver<com.bbles.automator.node.protobuf.GeneralProtocol.TaskDescriptor> responseObserver) {
-      asyncUnimplementedUnaryCall(getSubmitMethodHelper(), responseObserver);
+    public void execute(com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper request,
+        io.grpc.stub.StreamObserver<com.bbles.automator.node.protobuf.GeneralProtocol.TaskOutput> responseObserver) {
+      asyncUnimplementedUnaryCall(getExecuteMethodHelper(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
-            getSubmitMethodHelper(),
-            asyncUnaryCall(
+            getExecuteMethodHelper(),
+            asyncServerStreamingCall(
               new MethodHandlers<
                 com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper,
-                com.bbles.automator.node.protobuf.GeneralProtocol.TaskDescriptor>(
-                  this, METHODID_SUBMIT)))
+                com.bbles.automator.node.protobuf.GeneralProtocol.TaskOutput>(
+                  this, METHODID_EXECUTE)))
           .build();
     }
   }
@@ -132,10 +132,10 @@ public final class ClientMasterServiceGrpc {
 
     /**
      */
-    public void submit(com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper request,
-        io.grpc.stub.StreamObserver<com.bbles.automator.node.protobuf.GeneralProtocol.TaskDescriptor> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getSubmitMethodHelper(), getCallOptions()), request, responseObserver);
+    public void execute(com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper request,
+        io.grpc.stub.StreamObserver<com.bbles.automator.node.protobuf.GeneralProtocol.TaskOutput> responseObserver) {
+      asyncServerStreamingCall(
+          getChannel().newCall(getExecuteMethodHelper(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -159,9 +159,10 @@ public final class ClientMasterServiceGrpc {
 
     /**
      */
-    public com.bbles.automator.node.protobuf.GeneralProtocol.TaskDescriptor submit(com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper request) {
-      return blockingUnaryCall(
-          getChannel(), getSubmitMethodHelper(), getCallOptions(), request);
+    public java.util.Iterator<com.bbles.automator.node.protobuf.GeneralProtocol.TaskOutput> execute(
+        com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper request) {
+      return blockingServerStreamingCall(
+          getChannel(), getExecuteMethodHelper(), getCallOptions(), request);
     }
   }
 
@@ -182,17 +183,9 @@ public final class ClientMasterServiceGrpc {
         io.grpc.CallOptions callOptions) {
       return new ClientMasterServiceFutureStub(channel, callOptions);
     }
-
-    /**
-     */
-    public com.google.common.util.concurrent.ListenableFuture<com.bbles.automator.node.protobuf.GeneralProtocol.TaskDescriptor> submit(
-        com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper request) {
-      return futureUnaryCall(
-          getChannel().newCall(getSubmitMethodHelper(), getCallOptions()), request);
-    }
   }
 
-  private static final int METHODID_SUBMIT = 0;
+  private static final int METHODID_EXECUTE = 0;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -211,9 +204,9 @@ public final class ClientMasterServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_SUBMIT:
-          serviceImpl.submit((com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper) request,
-              (io.grpc.stub.StreamObserver<com.bbles.automator.node.protobuf.GeneralProtocol.TaskDescriptor>) responseObserver);
+        case METHODID_EXECUTE:
+          serviceImpl.execute((com.bbles.automator.node.protobuf.GeneralProtocol.TaskWrapper) request,
+              (io.grpc.stub.StreamObserver<com.bbles.automator.node.protobuf.GeneralProtocol.TaskOutput>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -276,7 +269,7 @@ public final class ClientMasterServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new ClientMasterServiceFileDescriptorSupplier())
-              .addMethod(getSubmitMethodHelper())
+              .addMethod(getExecuteMethodHelper())
               .build();
         }
       }

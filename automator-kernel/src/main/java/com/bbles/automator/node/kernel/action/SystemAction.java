@@ -9,4 +9,14 @@ package com.bbles.automator.node.kernel.action;
  * - An Interrupt Action from the processors to the kernel. (handler by InterruptHandler)
  */
 public interface SystemAction {
+
+  String getCommand();
+
+
+  String getType();
+
+  String[] getArgs();
+
+  String getArgsString();
+
 }

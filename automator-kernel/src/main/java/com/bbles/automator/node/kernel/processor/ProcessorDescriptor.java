@@ -1,7 +1,6 @@
 package com.bbles.automator.node.kernel.processor;
 
 import com.bbles.automator.node.kernel.task.TaskDescriptor;
-import com.bbles.automator.node.kernel.task.TaskWrapper;
 
 import java.util.PriorityQueue;
 

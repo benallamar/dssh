@@ -4,5 +4,5 @@ import public "general.proto";
 package com.bbles.automator.node.protobuf;
 
 service ClientMasterService {
-    rpc submit (TaskWrapper) returns (TaskDescriptor);
+    rpc execute (TaskWrapper) returns (stream TaskOutput);
 }

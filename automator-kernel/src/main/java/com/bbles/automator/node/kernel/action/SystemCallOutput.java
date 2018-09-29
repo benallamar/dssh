@@ -8,8 +8,10 @@
 
 package com.bbles.automator.node.kernel.action;
 
-public interface SystemCall {
-  SystemCallContext getContext();
+public interface SystemCallOutput {
+  String getJobId();
 
-  SystemAction getAction();
+  String getStandartOutput();
+
+  String getErrorOutput();
 }

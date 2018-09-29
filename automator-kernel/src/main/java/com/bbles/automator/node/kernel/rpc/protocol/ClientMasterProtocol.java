@@ -1,18 +1,16 @@
 package com.bbles.automator.node.kernel.rpc.protocol;
 
 
-import com.bbles.automator.node.kernel.task.TaskDescriptor;
-import com.bbles.automator.node.kernel.task.TaskWrapper;
+import com.bbles.automator.node.kernel.action.SystemCall;
+import com.bbles.automator.node.kernel.action.SystemCallOutput;
 
-import java.io.IOException;
+public interface ClientMasterProtocol {
 
-public interface ClientMasterProtocol extends ClientProtocol {
-
-    /**
-     * For the time being we considere blocked execution
-     *
-     * @param taskWrapper
-     * @throws IOException
-     */
-    TaskDescriptor submit(TaskWrapper taskWrapper);
+  /**
+   * Submit a request to the master to be executed
+   *
+   * @param systemCall {@link SystemCall}
+   * @throws com.bbles.automator.node.kernel.exception.task.IllegalTask
+   */
+  SystemCallOutput execute(SystemCall systemCall) throws Exception;
 }

@@ -27,6 +27,10 @@ message TaskWrapper {
     required Task tsk = 2;
 }
 
+
+message TaskOutput {
+    required string task_id = 1;
+}
 message TaskDescriptor {
     required string taskId = 1;
     optional TaskWrapper taskWrapper = 2;
